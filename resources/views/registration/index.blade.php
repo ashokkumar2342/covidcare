@@ -19,7 +19,7 @@
   <!-- Google Font: Source Sans Pro -->
   {{-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> --}}
 </head>
-<body id="body_id">
+<body class="hold-transition register-page" id="body_id">
 <div class="register-box">
   {{-- <div class="register-logo">
     <a href="#"><b> Plasma COVID-19 Donor Registration</b></a>
