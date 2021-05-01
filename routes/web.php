@@ -15,9 +15,16 @@ Route::get('/func', function () {
     return MyFuncs::full_name("John","Doe");
 });
  
-Route::get('registration', 'Admin\RegistrationController@index')->name('user.registration');
-Route::get('/', 'Admin\RegistrationController@index')->name('user.registration');
-Route::post('store', 'Admin\RegistrationController@store')->name('admin.registration.store');
+Route::get('/', 'Admin\RegistrationController@mobileVerification')->name('user.mobile.verification'); 
+Route::get('mobile-verification', 'Admin\RegistrationController@mobileVerification')->name('user.mobile.verification');
+Route::get('mobile-verification-store', 'Admin\RegistrationController@mobileVerificationStore')->name('user.mobile.verification.store');
+Route::get('mobile-verification-otp/{mobile}', 'Admin\RegistrationController@mobileVerificationOtp')->name('user.mobile.verification.otp');
+Route::post('mobile-otp-verification/{mobile}', 'Admin\RegistrationController@mobileOtpVerification')->name('user.mobile.otp.verification'); 
+Route::get('registration/{mobile}', 'Admin\RegistrationController@registration')->name('user.registration');
+Route::get('block-mcs', 'Admin\RegistrationController@blockMcs')->name('block.mcs');
+Route::get('village/{district_id}', 'Admin\RegistrationController@village')->name('village');
+
+Route::post('store/{mobile}', 'Admin\RegistrationController@store')->name('admin.registration.store');
 
 
 

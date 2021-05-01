@@ -29,7 +29,7 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Plasma COVID-19 Donor Registration</p>
 
-      <form action="{{ route('admin.registration.store') }}" method="post" class="add_form">
+      <form action="{{ route('admin.registration.store',Crypt::encrypt($mobile)) }}" method="post" class="add_form" redirect-to="{{ route('user.mobile.verification') }}">
         {{ csrf_field() }}
         {{-- <div class="input-group mb-3">
           <select name="district" class="form-control select2">
@@ -67,7 +67,7 @@
         </div>
         <p class="text-danger">{{ $errors->first('email') }}</p>
         <div class="input-group mb-3">
-          <input type="text" name="mobile_no" class="form-control" placeholder="Mobile No." maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+          <input type="text" name="mobile_no" value="{{ $mobile }}" class="form-control" placeholder="Mobile No." maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' readonly>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-phone"></span>
@@ -85,17 +85,41 @@
         </div>
         <p class="text-danger">{{ $errors->first('address') }}</p>
         <div class="input-group mb-3">
+          <input type="text" name="pincode"  class="form-control" placeholder="Enter Pincode" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-map-pin"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
           <select class="form-control" id="blood_group" name="blood_group"><option selected="selected" value="">Select Blood Group</option>
-          	<option value="A+">A+</option>
-          	<option value="A-">A-</option>
-          	<option value="AB+">AB+</option>
-          	<option value="AB-">AB-</option>
-          	<option value="B+">B+</option>
-          	<option value="B-">B-</option>
-          	<option value="O+">O+</option>
+            @foreach ($blood_groups as $blood_group)
+              <option value="{{ $blood_group->id }}">{{ $blood_group->name }}</option>
+            @endforeach 
           </select>
         </div>
-        <p class="text-danger">{{ $errors->first('blood_group') }}</p>
+        <div class="input-group mb-3">
+          <select class="form-control" id="district_id" name="district_id" onclick="callAjax(this,'{{ route('block.mcs') }}','block_mcs')">
+            <option selected="selected" value="">Select District</option>
+            @foreach ($districts as $district)
+              <option value="{{ $district->id }}">{{ $district->name_e }}</option>
+            @endforeach 
+          </select>
+        </div>
+
+        <div class="input-group mb-3" id="block_mcs">
+          <select class="form-control" id="blood_group" name="blood_group"><option selected="selected" value="">Select Block MCS</option>
+             
+          </select>
+        </div>
+
+        <div class="input-group mb-3" id="village">
+          <select class="form-control" id="village" name="village"><option selected="selected" value="">Select Village</option>
+             
+          </select>
+        </div>
+         
          
         <div class="row"> 
           <div class="col-12">

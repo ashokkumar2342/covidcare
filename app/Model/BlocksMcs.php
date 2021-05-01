@@ -4,10 +4,10 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class District extends Model
+class BlocksMcs extends Model
 {
 	
-   protected $table='districts';
+   protected $table='blocks_mcs';
    protected $guard=[];
    public $timestamps=false; 
 

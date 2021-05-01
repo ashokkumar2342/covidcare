@@ -4,12 +4,9 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RegistrationUser extends Model
+class AdminsOtp extends Model
 {
-	protected $table='registration_user';
+	protected $table='admins_otp';
 	protected $guard=[];
 	public $timestamps=false; 
-    
-
-   
 }
