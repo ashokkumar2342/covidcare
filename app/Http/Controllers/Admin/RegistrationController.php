@@ -53,6 +53,8 @@ class RegistrationController extends Controller
         $otp =$request->otp; 
         $adminsOtp =AdminsOtp::where('mobile_no',$mobile)->orderBy('id','DESC')->first(); 
         if ($adminsOtp->otp ==$otp) {
+            $adminsOtp->otp_verified=1;
+            $adminsOtp->save();
             return redirect()->route('user.registration',Crypt::encrypt($mobile))->with(['message'=>'OTP Verify Successfully','class'=>'success']);
              
         }else{
