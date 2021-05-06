@@ -20,7 +20,7 @@
   {{-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> --}}
 </head>
 <body class="hold-transition register-page" id="body_id">
-<div >
+<div class="register-box">
   {{-- <div class="register-logo">
     <a href="#"><b> Plasma COVID-19 Donor Registration</b></a>
   </div> --}}
@@ -98,7 +98,7 @@
         </div>
          
          <div class="input-group mb-3">
-           <select class="form-control" id="complaint_type_id" name="complaint_type_id" onchange="this.value==1?showHideDiv(1,'other_complaint_div'):showHideDiv(0,'other_complaint_div')">
+           <select class="form-control" id="complaint_type_id" name="complaint_type_id">
             <option selected="selected" value="">Select Complaints Type</option>
              @foreach ($ComplaintTypes as $complaints_type)
                <option value="{{ $complaints_type->id }}">{{ $complaints_type->name }}</option>
@@ -106,12 +106,12 @@
            </select>
          </div>
 
-          <div class="input-group mb-3" id="other_complaint_div" style="display: none;">
-           <textarea name="complaint_type_others" class="form-control" placeholder="Enter  Complaint Type Others"></textarea> 
+          <div class="input-group mb-3" id="other_complaint_div">
+           <textarea name="complaint_remarks" class="form-control" placeholder="Enter  Complaint Remarks"></textarea> 
          </div> 
 
          <div class="input-group mb-3">
-           <select class="form-control" id="complaint_related_to" name="complaint_related_to"><option selected="selected" value="">Select Complaints Complaint Related To </option>
+           <select class="form-control" id="complaint_related_to" name="complaint_related_to"><option selected="selected" value="">Select Complaint Related To </option>
              @foreach ($OfficerComplaints as $OfficerComplaint)
                <option value="{{ $OfficerComplaint->id }}">{{ $OfficerComplaint->name }} ({{ $OfficerComplaint->designation }})</option>
              @endforeach 

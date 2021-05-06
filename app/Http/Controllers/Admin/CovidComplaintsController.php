@@ -49,7 +49,9 @@ class CovidComplaintsController extends Controller
            'district_id' => 'required',  
            'block_id' => 'required',  
            'village_id' => 'required',  
+           'complaint_remarks' => 'required',  
            'complaint_type_id' => 'required',  
+           'complaint_related_to' => 'required',  
         ]; 
            $validator = Validator::make($request->all(),$rules);
            if ($validator->fails()) {
@@ -70,7 +72,7 @@ class CovidComplaintsController extends Controller
        $CovidComplaints->village_id = $request->village_id;  
        $CovidComplaints->complaint_date = date('Y-m-d');  
        $CovidComplaints->complaint_type_id = $request->complaint_type_id;  
-       $CovidComplaints->complaint_type_others = $request->complaint_type_others;  
+       $CovidComplaints->complaint_remarks = $request->complaint_remarks;  
        $CovidComplaints->complaint_related_to = $request->complaint_related_to;  
        $CovidComplaints->complaint_status = 0;   
        $CovidComplaints->save();  
