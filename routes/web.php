@@ -27,6 +27,11 @@ Route::get('village/{district_id}', 'Admin\RegistrationController@village')->nam
 Route::post('store/{mobile}', 'Admin\RegistrationController@store')->name('admin.registration.store');
 
 
+Route::get('covid-complaints', 'Admin\CovidComplaintsController@index')->name('covid.complaints');
+Route::post('covid-complaints-store', 'Admin\CovidComplaintsController@store')->name('covid.complaints.store');
+
+
+
 
 
 
