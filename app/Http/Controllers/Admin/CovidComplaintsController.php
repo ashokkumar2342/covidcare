@@ -26,7 +26,7 @@ class CovidComplaintsController extends Controller
     public function index()
     {   
       $blood_groups =BloodGroups::all();
-      $districts =District::all();
+      $districts =District::orderBy('name_e','ASC')->get();
       $ComplaintTypes =ComplaintTypes::all();
       $OfficerComplaints =OfficerComplaints::all();
       $data =array(); 

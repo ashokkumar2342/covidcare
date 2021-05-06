@@ -78,7 +78,7 @@ class RegistrationController extends Controller
     public function blockMcs(Request $request)
     {   
         $district_id =$request->id;
-        $blocksMcs =BlocksMcs::where('districts_id',$district_id)->get();
+        $blocksMcs =BlocksMcs::where('districts_id',$district_id)->orderBy('name_e','ASC')->get();
          
         $data =array();
         $data['district_id']= $district_id; 
@@ -88,7 +88,7 @@ class RegistrationController extends Controller
     public function village(Request $request,$district_id)
     {   
         $blocks_id =$request->id; 
-        $villages =Village::where('districts_id',$district_id)->where('blocks_id',$blocks_id)->get();
+        $villages =Village::where('districts_id',$district_id)->where('blocks_id',$blocks_id)->orderBy('name_e','ASC')->get();
          
         $data =array();
         $data['district_id']= $district_id; 
