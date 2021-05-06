@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\SmsEvent;
 use App\Http\Controllers\Controller;
 use App\Model\AdminsOtp;
 use App\Model\BlocksMcs;
@@ -32,7 +33,9 @@ class RegistrationController extends Controller
         ]); 
       
         $mobile =$request->mobile_no; 
-        $otp=DB::select(DB::raw("call up_generate_otp_newuser ('$mobile')"));  
+        $otp=DB::select(DB::raw("call up_generate_otp_newuser ('$mobile')")); 
+        $adminsOtp =AdminsOtp::where('mobile_no',$mobile)->orderBy('id','DESC')->first(); 
+        event(new SmsEvent($mobile,'OTP For registration of plasma donor is '.$adminsOtp->otp.' and valid for 20 min. Do not share this otp to anyone for security reason. District Administration Jhajjar')); 
         $response=array();
         $response["status"]=1;
         $response["msg"]="Send Otp Sucessfully"; 
@@ -43,6 +46,7 @@ class RegistrationController extends Controller
     }
     public function mobileVerificationOtp($mobile )
     {   
+
           
         $mobile =Crypt::decrypt($mobile);  
          return view('registration.verification',compact('mobile')); 

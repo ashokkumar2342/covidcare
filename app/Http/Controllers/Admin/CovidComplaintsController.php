@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\SmsEvent;
 use App\Http\Controllers\Controller;
 use App\Model\AdminsOtp;
 use App\Model\BlocksMcs;
@@ -62,6 +63,7 @@ class CovidComplaintsController extends Controller
                return response()->json($response);// response as json
            }  
        $CovidComplaints = new CovidComplaints();
+       $OfficerComplaint =OfficerComplaints::find($request->complaint_related_to);
        $CovidComplaints->name = $request->name;
        $CovidComplaints->father_name = $request->father_name;
        $CovidComplaints->mobile_no = $request->mobile_no; 
@@ -75,7 +77,15 @@ class CovidComplaintsController extends Controller
        $CovidComplaints->complaint_remarks = $request->complaint_remarks;  
        $CovidComplaints->complaint_related_to = $request->complaint_related_to;  
        $CovidComplaints->complaint_status = 0;   
-       $CovidComplaints->save();  
+       $CovidComplaints->save();   
+      
+      event(new SmsEvent($OfficerComplaint->mobile_no,'Complaint No. '.$CovidComplaints->id.' received from {#comp_name#} {#mobile#}. District Administration Jhajjar')); 
+      
+      event(new SmsEvent($request->mobile_no,'Your complaint No. '.$CovidComplaints->id.' have forwarded to {#name#} {#designation#} {#mobileno#}. District Administration Jhajjar')); 
+      if ($OfficerComplaint->mobile_no!=null) {
+          event(new SmsEvent($OfficerComplaint->alternate_mobile_no,'Complaint No. '.$CovidComplaints->id.' received from {#comp_name#} {#mobile#}. District Administration Jhajjar'));
+      }
+        
        $response=array();
        $response["status"]=1;
        $response["msg"]="Submit Sucessfully";
