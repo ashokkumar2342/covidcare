@@ -21,9 +21,9 @@
 </head>
 <body class="hold-transition register-page" id="body_id">
 <div class="register-box">
-  {{-- <div class="register-logo">
-    <a href="#"><b> Plasma COVID-19 Donor Registration</b></a>
-  </div> --}}
+  <div class="register-logo">
+    <img src="{{asset('img/po_logo_1.jpeg')}}" width="100%" alt="">
+  </div>
 
   <div class="card">
     <div class="card-body register-card-body">

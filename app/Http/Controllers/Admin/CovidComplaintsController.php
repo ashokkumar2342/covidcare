@@ -79,12 +79,12 @@ class CovidComplaintsController extends Controller
        $CovidComplaints->complaint_status = 0;   
        $CovidComplaints->save();   
       
-      event(new SmsEvent($OfficerComplaint->mobile_no,'Complaint No. '.$CovidComplaints->id.' received from {#comp_name#} {#mobile#}. District Administration Jhajjar')); 
+      // event(new SmsEvent($OfficerComplaint->mobile_no,'Complaint No. '.$CovidComplaints->id.' received from {#comp_name#} {#mobile#}. District Administration Jhajjar')); 
       
-      event(new SmsEvent($request->mobile_no,'Your complaint No. '.$CovidComplaints->id.' have forwarded to {#name#} {#designation#} {#mobileno#}. District Administration Jhajjar')); 
-      if ($OfficerComplaint->mobile_no!=null) {
-          event(new SmsEvent($OfficerComplaint->alternate_mobile_no,'Complaint No. '.$CovidComplaints->id.' received from {#comp_name#} {#mobile#}. District Administration Jhajjar'));
-      }
+      // event(new SmsEvent($request->mobile_no,'Your complaint No. '.$CovidComplaints->id.' have forwarded to {#name#} {#designation#} {#mobileno#}. District Administration Jhajjar')); 
+      // if ($OfficerComplaint->mobile_no!=null) {
+      //     event(new SmsEvent($OfficerComplaint->alternate_mobile_no,'Complaint No. '.$CovidComplaints->id.' received from {#comp_name#} {#mobile#}. District Administration Jhajjar'));
+      // }
         
        $response=array();
        $response["status"]=1;
